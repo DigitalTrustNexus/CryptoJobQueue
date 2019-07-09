@@ -1,0 +1,6 @@
+export assetID='2'
+export restServer='18.224.91.77'
+export restPort='18322'
+export magentoServer='ec2-18-224-91-77.us-east-2.compute.amazonaws.com'
+export magentoPort='18321'
+export bcUSD='5873.17'
