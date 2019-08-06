@@ -6,6 +6,7 @@
 var cron = require('node-cron');
 var fs = require('fs');
 var job = require('./job.js');
+var admin = require("./admin.js");
 
 //Setting parameters from the environment
 var assetID = process.env.assetID;
@@ -16,6 +17,7 @@ var magentoServerPort = process.env.magentoPort;
 var bitCoinToUSD = 1 / process.env.bcUSD;
 var printerConditionFile = "./printerCondition.json";
 var magentoCredentials = "./magentoCredentials.json";
+var magentoAdminCredentials = "./magentoAdminCredentials.json";
 var shippingInfo = "./shippingInfo.json";
 var downloadDir = "./download/";
 var recieptDir = "./certificates/";
@@ -60,6 +62,7 @@ cron.schedule('*/10 * * * * *', function () {
                 console.log('Asset creating and paying for order from Marketplace for needed file for selected job.')
                 var cartReturn = job.createOrder(selectedJob, magentoOptions, magentoCredentials, magentoHeader, shippingInfo);
                 var orderID = job.placeOrder(cartReturn,magentoOptions,restOptions);
+                admin.completeOrder(magentoHeader,magentoOptions,magentoAdminCredentials,orderID,restOptions);
                 console.log('Asset downloading purchased file.')
                 var productFile = job.downloadProduct(restOptions, assetID, selectedJob, magentoOptions, orderID, downloadDir);
                 console.log('Asset verifying downloaded file against the blockchain.')
