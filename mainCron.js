@@ -69,6 +69,6 @@ cron.schedule('*/10 * * * * *', function () {
                 job.verifyProduct(restOptions, assetID, selectedJob, productFile, recieptDir, printerConditionFile);
             }
         }
-        job.oneTransaction();
+        //job.oneTransaction();
     }
 });
