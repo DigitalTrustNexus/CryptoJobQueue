@@ -22,6 +22,12 @@ var shippingInfo = "./shippingInfo.json";
 var downloadDir = "./download/";
 var recieptDir = "./certificates/";
 
+// Configuration for the printer
+var location ="CVN-77";
+var dimension1 = 500;
+var dimension2 = 500;
+var dimension3 = 500;
+
 //Request options and headers for rest server
 var restOptions = new Object();
 var restHeader = new Object();
@@ -53,16 +59,17 @@ cron.schedule('*/10 * * * * *', function () {
              console.error('Error message (null if no errors) in writing printerCondition.json:  ' + err);
         });
         //Calling the functions written to follow the steps of finding and completing a job from the queue
-        var availableJobs = job.availableQueueJobs(restOptions);
+        var availableJobs = job.availableQueueJobs(restOptions,location, dimension1, dimension2, dimension3);
         //Selecting job if jobs are available
         if (availableJobs != null){
             console.log('Selecting a job from the available jobs.')
             var selectedJob = job.selectJob(availableJobs, restOptions, assetID, bitCoinToUSD, printerConditionFile);
             if (selectedJob != null) {
-                console.log('Asset creating and paying for order from Marketplace for needed file for selected job.')
-                var cartReturn = job.createOrder(selectedJob, magentoOptions, magentoCredentials, magentoHeader, shippingInfo);
-                var orderID = job.placeOrder(cartReturn,magentoOptions,restOptions);
-                admin.completeOrder(magentoHeader,magentoOptions,magentoAdminCredentials,orderID,restOptions);
+                //console.log('Asset creating and paying for order from Marketplace for needed file for selected job.')
+                //var cartReturn = job.createOrder(selectedJob, magentoOptions, magentoCredentials, magentoHeader, shippingInfo);
+                //var orderID = job.placeOrder(cartReturn,magentoOptions,restOptions);
+                //admin.completeOrder(magentoHeader,magentoOptions,magentoAdminCredentials,orderID,restOptions);
+                var orderID = selectedJob.ordernumber;
                 console.log('Asset downloading purchased file.')
                 var productFile = job.downloadProduct(restOptions, assetID, selectedJob, magentoOptions, orderID, downloadDir);
                 console.log('Asset verifying downloaded file against the blockchain.')
