@@ -23,10 +23,10 @@ var downloadDir = "./download/";
 var recieptDir = "./certificates/";
 
 // Configuration for the printer
-var location ="CVN-77";
-var dimension1 = 500;
-var dimension2 = 500;
-var dimension3 = 500;
+var location ="DDG-96";
+var dimension1 = 6;
+var dimension2 = 6.5;
+var dimension3 = 3.3;
 
 //Request options and headers for rest server
 var restOptions = new Object();
@@ -64,11 +64,17 @@ cron.schedule('*/10 * * * * *', function () {
         if (availableJobs != null){
             console.log('Selecting a job from the available jobs.')
             var selectedJob = job.selectJob(availableJobs, restOptions, assetID, bitCoinToUSD, printerConditionFile);
+            console.log('Selecting a job from the available jobs. result ' + selectedJob)
             if (selectedJob != null) {
-                //console.log('Asset creating and paying for order from Marketplace for needed file for selected job.')
-                //var cartReturn = job.createOrder(selectedJob, magentoOptions, magentoCredentials, magentoHeader, shippingInfo);
-                //var orderID = job.placeOrder(cartReturn,magentoOptions,restOptions);
-                //admin.completeOrder(magentoHeader,magentoOptions,magentoAdminCredentials,orderID,restOptions);
+			    /*
+                  // we don't need to issue order as it will be done by from the browser 
+
+                  console.log('Asset creating and paying for order from Marketplace for needed file for selected job.')
+                  var cartReturn = job.createOrder(selectedJob, magentoOptions, magentoCredentials, magentoHeader, shippingInfo);
+                  var orderID = job.placeOrder(cartReturn,magentoOptions,restOptions);
+                  admin.completeOrder(magentoHeader,magentoOptions,magentoAdminCredentials,orderID,restOptions);
+                */
+
                 var orderID = selectedJob.ordernumber;
                 console.log('Asset downloading purchased file.')
                 var productFile = job.downloadProduct(restOptions, assetID, selectedJob, magentoOptions, orderID, downloadDir);
