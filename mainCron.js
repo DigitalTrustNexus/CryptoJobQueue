@@ -44,6 +44,8 @@ magentoOptions['host'] = magentoServerURL;
 magentoOptions['port'] = magentoServerPort;
 magentoOptions['headers'] = magentoHeader;
 
+job.initWS();
+
 console.log('Running cron job every 10 seconds');
 cron.schedule('*/10 * * * * *', function () {
     var printerCondition = JSON.parse(fs.readFileSync(printerConditionFile)).printerCondition;
