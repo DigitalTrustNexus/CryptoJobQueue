@@ -23,10 +23,16 @@ var downloadDir = "./download/";
 var recieptDir = "./certificates/";
 
 // Configuration for the printer
+/*
 var location ="DDG-96";
 var dimension1 = 6;
 var dimension2 = 6.5;
 var dimension3 = 3.3;
+*/
+var location = process.env.location;
+var dimension1 = process.env.dimension1;
+var dimension2 = process.env.dimension2;
+var dimension3 = process.env.dimension3;
 
 //Request options and headers for rest server
 var restOptions = new Object();
