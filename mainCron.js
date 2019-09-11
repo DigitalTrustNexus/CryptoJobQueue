@@ -7,6 +7,7 @@ var cron = require('node-cron');
 var fs = require('fs');
 var job = require('./job.js');
 var admin = require("./admin.js");
+var ws = require('./ws.js');
 
 //Setting parameters from the environment
 var assetID = process.env.assetID;
@@ -50,7 +51,7 @@ magentoOptions['host'] = magentoServerURL;
 magentoOptions['port'] = magentoServerPort;
 magentoOptions['headers'] = magentoHeader;
 
-job.initWS();
+ws.initWS();
 
 console.log('Running cron job every 10 seconds');
 cron.schedule('*/10 * * * * *', function () {
