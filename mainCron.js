@@ -5,7 +5,7 @@
 //Adding the required javascript modules
 var cron = require('node-cron');
 var fs = require('fs');
-var job = require('./job.js');
+var job = require('./slowjob.js');
 var admin = require("./admin.js");
 var ws = require('./ws.js');
 
