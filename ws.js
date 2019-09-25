@@ -30,11 +30,11 @@ module.exports.initWS = function() {
 
 }
 
-module.exports.sendProgress = function(location, number, msg) {
+module.exports.sendProgress = function(location, number, msg, printer) {
     console.log("wscon = " + wscon);
     if (wscon != null && wscon.connected) {
          //var number = Math.round(Math.random() * 100);
-         var data ={'location':location, 'value': number, 'msg': msg};
+         var data ={'location':location, 'value': number, 'msg': msg, 'printer': printer};
          wscon.send(JSON.stringify(data));
     }
 }
