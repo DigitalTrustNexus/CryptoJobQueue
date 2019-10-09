@@ -15,8 +15,12 @@
   "author": "Dan Yang",
   "license": "ISC",
   "dependencies": {
+    "bitcoinjs-lib": "^5.1.6",
     "chainpoint-client": "^0.4.1",
     "deasync": "^0.1.15",
-    "node-cron": "^2.0.3"
+    "eccrypto": "^1.1.1",
+    "json-payment-protocol": "^0.2.0",
+    "node-cron": "^2.0.3",
+    "websocket": "^1.0.30"
   }
 }
